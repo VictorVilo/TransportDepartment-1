@@ -17,7 +17,93 @@ public class DAOHandler {
 	private String dbname = "root";
 	private String pass = "";
 		
-		
+	public static void createTable(){
+			try{
+				Connection con= getConnection();
+				//Table for scheduled trips
+				String query1 = "CREATE TABLE IF NOT EXISTS scheduled_trips("
+						+ "id int NOT NULL AUTO_INCREMENT PRIMARY KEY, "
+						+ "destination varchar(100) NOT NULL, "
+						+ "departure_date varchar(50) NOT NULL, "
+						+ "return_date varchar(50) NOT NULL, "
+						+ "no_of_students int NOT NULL, "
+						+ "faculty varchar(100) NOT NULL, "
+						+ "department varchar(100) NOT NULL,"
+						+ "assigned_bus varchar(100) NOT NULL)";		
+				
+				//table details for drivers
+				String query2 = "CREATE TABLE IF NOT EXISTS drivers("
+						+ "id int NOT NULL AUTO_INCREMENT PRIMARY KEY, "
+						+ "emp_id varchar(50) NOT NULL, "
+						+ "password varchar(100) NOT NULL, "
+						+ "email varchar(100), "
+						+ "id_no int, "
+						+ "phone_no varchar(100))";
+				
+				String query3 = "CREATE TABLE IF NOT EXISTS cars("
+						+ "id int NOT NULL AUTO_INCREMENT PRIMARY KEY, "
+						+ "number_plate varchar(30) NOT NULL, "
+						+ "insurance_company varchar(100) NOT NULL, "
+						+ "premium int NOT NULL, "
+						+ "vehicle_condition varchar(50), "
+						+ "assigned_driver varchar(100), "
+						+ "mileage_covered int, "
+						+ "scheduled varchar(30))";
+				
+				String query4 = "CREATE TABLE IF NOT EXISTS lorries("
+						+ "id int NOT NULL AUTO_INCREMENT PRIMARY KEY, "
+						+ "number_plate varchar(30) NOT NULL, "
+						+ "insurance_company varchar(100) NOT NULL, "
+						+ "premium int NOT NULL, "
+						+ "vehicle_condition varchar(50), "
+						+ "assigned_driver varchar(100), "
+						+ "mileage_covered int, "
+						+ "scheduled varchar(30))";
+				
+				String query5 = "CREATE TABLE IF NOT EXISTS tractors("
+						+ "id int NOT NULL AUTO_INCREMENT PRIMARY KEY, "
+						+ "number_plate varchar(30) NOT NULL, "
+						+ "insurance_company varchar(100) NOT NULL, "
+						+ "premium int NOT NULL, "
+						+ "vehicle_condition varchar(50), "
+						+ "assigned_driver varchar(100), "
+						+ "mileage_covered int, "
+						+ "scheduled varchar(30))";
+				
+				
+				String query6 = "CREATE TABLE IF NOT EXISTS buses("
+						+ "id int NOT NULL AUTO_INCREMENT PRIMARY KEY, "
+						+ "capacity int NOT NULL, "
+						+ "number_plate varchar(30) NOT NULL, "
+						+ "insurance_company varchar(100) NOT NULL, "
+						+ "premium int NOT NULL, "
+						+ "bus_condition varchar(50), "
+						+ "purchase_date varchar(100), "
+						+ "mileage_covered int, "
+						+ "due_repair varchar(100),"
+						+ "scheduled varchar(30))";
+				
+				PreparedStatement statement1 = con.prepareStatement(query1);
+				statement1.executeUpdate();
+				
+				PreparedStatement statement2 = con.prepareStatement(query2);
+				statement2.executeUpdate();
+				
+				PreparedStatement statement3 = con.prepareStatement(query3);
+				statement3.executeUpdate();
+				
+				PreparedStatement statement4 = con.prepareStatement(query4);
+				statement4.executeUpdate();
+				
+				PreparedStatement statement5 = con.prepareStatement(query5);
+				statement5.executeUpdate();
+				
+				PreparedStatement statement6 = con.prepareStatement(query6);
+				statement6.executeUpdate();
+			} catch(Exception ex){
+				System.out.println(ex);
+			}
+		}
 		
 		
 		//a method that is used to insert data from the academic trip details to the database
