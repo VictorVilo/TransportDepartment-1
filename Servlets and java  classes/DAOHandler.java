@@ -12,10 +12,24 @@ import java.util.Date;
 
 public class DAOHandler {
 	
-	//the database details
-	private String url="jdbc:mysql://localhost:3306/group_project";
-	private String dbname = "root";
-	private String pass = "";
+	public static Connection getConnection(){
+			
+			try{
+				String driver = "com.mysql.jdbc.Driver";
+				//the database details
+				String url="jdbc:mysql://localhost:3306/group_project";
+				String dbname = "root";
+				String pass = "";
+					
+				Class.forName(driver);
+				Connection con = DriverManager.getConnection(url, dbname, pass);
+				return con;
+			} catch(Exception ex){
+				System.out.println(ex);
+			}
+			
+			return null;
+		}
 		
 	public static void createTable(){
 			try{
