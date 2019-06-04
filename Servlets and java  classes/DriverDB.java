@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 
 public class DriverDB {
 	
-	String url="jdbc:mysql://localhost:3306/trial";
+	String url="jdbc:mysql://localhost:3306/transportdepartment";
 	String usernm="root";
 	String pass="Kelvin@5257";
 	
 	
-	public void postdb(String dateoftrip, int driverno, String detailsofjourney, int oildrawn, int fueldrawn, int cashreceipt, int timeout, int timein, int begmileage, int endmileage, String defects) {
+	public void postdb(String dateoftrip, int driverno, String detailsofjourney, int oildrawn, int fueldrawn, int cashreceipt, String timeout, String timein, int begmileage, int endmileage, String defects) {
 	
 		try {
 			
@@ -28,8 +28,8 @@ public class DriverDB {
 			st.setInt(4, oildrawn);
 			st.setInt(5, fueldrawn);
 			st.setInt(6, cashreceipt);
-			st.setInt(7, timeout);
-			st.setInt(8, timein);
+			st.setString(7, timeout);
+			st.setString(8, timein);
 			st.setInt(9, begmileage);
 			st.setInt(10, endmileage);
 			st.setString(11, defects);
