@@ -42,8 +42,8 @@ public class DriverServlet extends HttpServlet {
 		int oildrawn = Integer.parseInt(request.getParameter("oildrawn"));
 		int fueldrawn = Integer.parseInt(request.getParameter("fueldrawn"));
 		int cashreceipt = Integer.parseInt(request.getParameter("cahsreceipt"));
-		int timeout = Integer.parseInt(request.getParameter("timeout"));
-		int timein = Integer.parseInt(request.getParameter("timein"));
+		String timeout = request.getParameter("timeout");
+		String timein = request.getParameter("timein");
 		int begmileage = Integer.parseInt(request.getParameter("begmileage"));
 		int endmileage = Integer.parseInt(request.getParameter("endmileage"));
 		String defects = request.getParameter("defects");
