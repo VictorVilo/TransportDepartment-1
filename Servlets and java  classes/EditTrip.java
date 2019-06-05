@@ -27,23 +27,39 @@ public class EditTrip extends HttpServlet {
 		String department = request.getParameter("department");
 		
 		try{
-		DAOHandler dao = new DAOHandler();
-		Connection con = dao.getConnection();
-		String query = "UPDATE scheduled_trips set destination=?, departure_date=?, return_date=?, no_of_students=?, faculty=?, department=? where id = '"+id+"'";
-		PreparedStatement stmt = con.prepareStatement(query);
-		stmt.setString(1, destination);
-		stmt.setString(2, departure_date);
-		stmt.setString(3, return_date);
-		stmt.setInt(4, passengers);
-		stmt.setString(5, faculty);
-		stmt.setString(6, department);
+
 		
-		stmt.executeUpdate();
+		//check if there are any empty fields
+		if(destination.equals("") || departure_date.equals("") || passengers < 0 || faculty.equals("") || department.equals("") || return_date.equals(""))  {
+			request.setAttribute("message1", "Failed to update record! Invalid details or empty fields");
+			request.getRequestDispatcher("scheduled_trips.jsp").forward(request, response);
+		} else{
+			
+			DAOHandler dao = new DAOHandler();
+			Connection con = dao.getConnection();
+			String query = "UPDATE scheduled_trips set destination=?, departure_date=?, return_date=?, no_of_students=?, faculty=?, department=? where id = '"+id+"'";
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, destination);
+			stmt.setString(2, departure_date);
+			stmt.setString(3, return_date);
+			stmt.setInt(4, passengers);
+			stmt.setString(5, faculty);
+			stmt.setString(6, department);
+			
+			int result = stmt.executeUpdate();
+			
+			if(result > 0){
+				request.setAttribute("message", "Record updated successfuly");
+				request.getRequestDispatcher("scheduled_trips.jsp").forward(request, response);
+			} else {
+				request.setAttribute("message1", "Failed to update record");
+				request.getRequestDispatcher("scheduled_trips.jsp").forward(request, response);
+			}
+		}
 		} catch (Exception ex){
 			System.out.println(ex);
 		}
 		
-		response.sendRedirect("scheduled_trips.jsp");
 	}
 
 }
